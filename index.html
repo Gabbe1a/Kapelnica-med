@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>АкваМед - Клиника капельниц в Санкт-Петербурге</title>
+    <!-- Подключаем нужные шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css?v=8">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-container">
+            <div class="header-top">
+                <!-- Логотип -->
+                <a href="/" class="logo-block">
+                    <div class="logo-icon">
+                        <!-- Примерный SVG логотипа (замените на экспорт из Figma) -->
+                        <img src="design-assets/Group 14.svg" alt="" class="logo-img">
+                    </div>
+                    <div class="logo-text-block">
+                        <span class="logo-title">АкваМед</span>
+                        <span class="logo-subtitle">Клиника капельниц</span>
+                    </div>
+                </a>
+
+                <!-- Блок с контактами (адрес, телефон, время) -->
+                <div class="info-block">
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <img src="design-assets/Group 13.svg" alt="" class="info-icon-img">
+                        </div>
+                        <div class="info-text-col">
+                            <span class="info-label">Адрес</span>
+                            <span class="info-value">Санкт-Петербург, ул. Авиаконструкторов 45к1 </span>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <img src="design-assets/Group 13 telef.svg" alt="" class="info-icon-img">
+                        </div>
+                        <div class="info-text-col">
+                            <span class="info-label">Поддержка 24/7</span>
+                            <span class="info-value">+7 (800) 889-99-99</span>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <img src="design-assets/Group 12.svg" alt="" class="info-icon-img">
+                        </div>
+                        <div class="info-text-col">
+                            <span class="info-label">Время работы</span>
+                            <span class="info-value">Круглосуточно</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Социальные иконки и действия -->
+                <div class="social-block">
+                    <!-- Глаз (версия для слабовидящих) -->
+                    <a href="#" class="social-icon">
+                        <img src="design-assets/Group 12 glaz.svg" alt="" class="social-icon-img">
+                    </a>
+
+                    <div class="social-icons-group">
+                        <a href="#" class="social-box js-open-search-modal"><img src="design-assets/socials search.svg" alt="" class="social-box-img">
+                        </a>
+                        <a href="#" class="social-box">
+                            <img src="design-assets/socials vk.svg" alt="VK" class="social-box-img">
+                        </a>
+                        <a href="#" class="social-box">
+                            <img src="design-assets/socials tg.svg" alt="Telegram" class="social-box-img">
+                        </a>
+                        <a href="#" class="social-box">
+                            <img src="design-assets/Vector OK.svg" alt="OK" class="social-box-img social-box-img-ok">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Кнопка мобильного меню (гамбургер) -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <div class="header-bottom">
+                <nav class="nav">
+                    <div class="nav-dropdown-wrapper">
+                        <a href="#" class="nav-item active">
+                            <span class="nav-dot"></span> Услуги
+                            <svg class="nav-arrow" width="12" height="7" viewBox="0 0 12 7" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1L6 6L11 1" stroke="#007844" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                        <div class="nav-dropdown-menu">
+                            <a href="#" class="nav-dropdown-item">Медикаментозные капельницы (препараты)</a>
+                            
+                            <div class="nav-dropdown-submenu-wrapper">
+                                <a href="#" class="nav-dropdown-item active">
+                                    Инфузионная терапия
+                                    <svg class="submenu-arrow" width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 11L6 6L1 1" stroke="#007844" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </a>
+                                <div class="nav-dropdown-submenu">
+                                    <a href="#" class="nav-dropdown-subitem">Капельница на дому</a>
+                                    <a href="#" class="nav-dropdown-subitem active">Капельница для печени</a>
+                                    <a href="#" class="nav-dropdown-subitem">Капельницы для сосудов</a>
+                                    <a href="#" class="nav-dropdown-subitem">Капельницы при отравлении алкоголем</a>
+                                    <a href="#" class="nav-dropdown-subitem">Капельница для сердца</a>
+                                    <a href="#" class="nav-dropdown-subitem">Капельница при стрессе</a>
+                                </div>
+                            </div>
+
+                            <a href="#" class="nav-dropdown-item">Капельницы красоты</a>
+                            <a href="#" class="nav-dropdown-item">Комплексные инфузионные программы</a>
+                            <a href="#" class="nav-dropdown-item">Диагностика и анализы</a>
+                            <a href="#" class="nav-dropdown-item">Другие услуги</a>
+                        </div>
+                    </div>
+                    <a href="#about" class="nav-item">
+                        О клинике
+                        <svg class="nav-arrow" width="12" height="7" viewBox="0 0 12 7" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1L6 6L11 1" stroke="#007844" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                    <a href="#prices" class="nav-item">Цены</a>
+                    <a href="#doctors" class="nav-item">Врачи</a>
+                    <a href="#contacts" class="nav-item">Контакты</a>
+                    <a href="#articles" class="nav-item">Статьи</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="btn btn-outline" id="btn-signup">Записаться</button>
+                    <button class="btn btn-primary js-open-drip-sheet" id="btn-home">Капельница на дому</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Мобильное меню (полноэкранное) -->
+        <div class="mobile-nav-overlay" id="mobileNavOverlay">
+            <div class="mobile-nav-container">
+                <!-- Шапка меню -->
+                <div class="mobile-nav-top-header">
+                    <a href="/" class="logo-block">
+                        <div class="logo-icon">
+                            <img src="design-assets/Group 14.svg" alt="" class="logo-img"
+                                style="width:46px;height:46px;">
+                        </div>
+                    </a>
+                    <a href="#" class="btn btn-primary mobile-btn-home js-open-drip-sheet"><span>Капельница на
+                            дому</span></a>
+                    <button class="mobile-nav-close" id="mobileNavClose" aria-label="Закрыть">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 6L6 18" stroke="#007844" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M6 6L18 18" stroke="#007844" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Контент меню -->
+                <div class="mobile-nav-content">
+                    <div class="mobile-nav-actions-top">
+                        <div class="mobile-search-box">
+                            <input type="text" placeholder="Поиск по сайту" class="mobile-search-input">
+                            <img src="design-assets/socials search.svg" alt="" class="mobile-search-icon">
+                        </div>
+                        <button class="btn btn-primary mobile-btn-consultation">Бесплатная консультация</button>
+                    </div>
+
+                    <div class="mobile-nav-accordion-group">
+                        <div class="mobile-accordion">
+                            <button class="mobile-accordion-btn">
+                                <span class="mobile-accordion-title">Услуги</span>
+                                <svg width="12" height="7" viewBox="0 0 12 7" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg" class="mobile-accordion-arrow">
+                                    <path d="M1 1L6 6L11 1" stroke="#007844" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <div class="mobile-accordion-body">
+                                <div class="mobile-sub-menu">
+                                    <div class="mobile-sub-item">
+                                        <button class="mobile-sub-btn">
+                                            <span>Медикаментозные капельницы (препараты)</span>
+                                            <svg width="12" height="7" viewBox="0 0 12 7" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 1L6 6L11 1" stroke="#004728" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="mobile-sub-item active">
+                                        <button class="mobile-sub-btn">
+                                            <span>Инфузионная терапия</span>
+                                            <svg width="12" height="7" viewBox="0 0 12 7" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 1L6 6L11 1" stroke="#004728" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
+                                        <div class="mobile-sub-content">
+                                            <a href="#" class="mobile-sub-link js-open-drip-sheet">Капельница на
+                                                дому</a>
+                                            <a href="#" class="mobile-sub-link">Капельница для печени</a>
+                                            <a href="#" class="mobile-sub-link">Капельницы для сосудов</a>
+                                            <a href="#" class="mobile-sub-link">Капельницы при отравлении алкоголем</a>
+                                            <a href="#" class="mobile-sub-link">Капельница для сердца</a>
+                                            <a href="#" class="mobile-sub-link">Капельница при стрессе</a>
+                                        </div>
+                                    </div>
+                                    <div class="mobile-sub-item">
+                                        <button class="mobile-sub-btn">
+                                            <span>Капельницы красоты</span>
+                                            <svg width="12" height="7" viewBox="0 0 12 7" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 1L6 6L11 1" stroke="#004728" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="mobile-sub-item">
+                                        <button class="mobile-sub-btn">
+                                            <span>Комплексные инфузионные программы</span>
+                                            <svg width="12" height="7" viewBox="0 0 12 7" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 1L6 6L11 1" stroke="#004728" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="mobile-sub-item">
+                                        <button class="mobile-sub-btn">
+                                            <span>Диагностика и анализы</span>
+                                            <svg width="12" height="7" viewBox="0 0 12 7" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 1L6 6L11 1" stroke="#004728" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="mobile-sub-item">
+                                        <button class="mobile-sub-btn">
+                                            <span>Другие услуги</span>
+                                            <svg width="12" height="7" viewBox="0 0 12 7" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 1L6 6L11 1" stroke="#004728" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="#about" class="mobile-nav-link-item">
+                            <span>О клинике</span>
+                            <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                class="mobile-accordion-arrow-right">
+                                <path d="M1 1L6 6L11 1" stroke="#007844" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                        <a href="#prices" class="mobile-nav-link-item"><span>Цены</span></a>
+                        <a href="#doctors" class="mobile-nav-link-item"><span>Врачи</span></a>
+                        <a href="#contacts" class="mobile-nav-link-item"><span>Контакты</span></a>
+                        <a href="#articles" class="mobile-nav-link-item"><span>Статьи</span></a>
+                    </div>
+
+                    <div class="mobile-contacts-info">
+                        <div class="mobile-contact-row">
+                            <div class="mobile-contact-icon">
+                                <img src="design-assets/Group 13 telef.svg" alt="">
+                            </div>
+                            <div class="mobile-contact-text">
+                                <span class="mobile-contact-label">Телефон</span>
+                                <span class="mobile-contact-val">+7 (800) 889-99-99</span>
+                            </div>
+                        </div>
+                        <div class="mobile-contact-row">
+                            <div class="mobile-contact-icon">
+                                <img src="design-assets/Group 13.svg" alt="">
+                            </div>
+                            <div class="mobile-contact-text">
+                                <span class="mobile-contact-label">Адрес</span>
+                                <span class="mobile-contact-val">Санкт-Петербург, ул. Авиаконструкторов 45к1</span>
+                            </div>
+                        </div>
+                        <div class="mobile-contact-row">
+                            <div class="mobile-contact-icon">
+                                <svg width="22" height="18" viewBox="0 0 22 18" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M3 1H19C20.1 1 21 1.9 21 3V15C21 16.1 20.1 17 19 17H3C1.9 17 1 16.1 1 15V3C1 1.9 1.9 1 3 1Z"
+                                        stroke="#87C463" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M21 3L11 10L1 3" stroke="#87C463" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <div class="mobile-contact-text">
+                                <span class="mobile-contact-label">Электронная почта</span>
+                                <span class="mobile-contact-val">info@kapelnica-med.ru</span>
+                            </div>
+                        </div>
+                        <div class="mobile-contact-row">
+                            <div class="mobile-contact-icon">
+                                <img src="design-assets/Group 12.svg" alt="">
+                            </div>
+                            <div class="mobile-contact-text">
+                                <span class="mobile-contact-label">Время работы</span>
+                                <span class="mobile-contact-val">Круглосуточно, 24/7</span>
+                            </div>
+                        </div>
+
+                        <div class="mobile-socials-row">
+                            <a href="#" class="social-box">
+                                <img src="design-assets/socials vk.svg" alt="VK" class="social-box-img">
+                            </a>
+                            <a href="#" class="social-box">
+                                <img src="design-assets/socials tg.svg" alt="Telegram" class="social-box-img">
+                            </a>
+                            <a href="#" class="social-box">
+                                <img src="design-assets/Vector OK.svg" alt="OK"
+                                    class="social-box-img social-box-img-ok">
+                            </a>
+                            <a href="#" class="social-box">
+                                <img src="design-assets/Group 12 glaz.svg" alt="Eye" class="social-box-img">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="hero-title-dark">Клиника капельниц АкваМед</span>
+                        <span class="hero-title-light">в&nbsp;Санкт-Петербурге</span>
+                    </h1>
+                    <p class="hero-subtitle">Инфузионные программы под контролем врачей: детокс, энергия, красота и
+                        поддержка иммунитета</p>
+
+                    <div class="hero-pills">
+                        <div class="hero-pill">
+                            <span class="pill-dot"></span>
+                            В клинике
+                        </div>
+                        <div class="hero-pill">
+                            <span class="pill-dot"></span>
+                            На дому
+                        </div>
+                    </div>
+
+                    <div class="hero-cards">
+                        <!-- Card 1 -->
+                        <div class="hero-card">
+                            <div class="card-header">
+                                <div>
+                                    <span class="card-label">Капельница</span>
+                                    <h3 class="card-title">Детокс</h3>
+                                </div>
+                                <img src="design-assets/icon_detox.svg" alt="Детокс" class="card-icon detox-icon">
+                            </div>
+                            <div class="card-desc">
+                                <span class="desc-dot detox-dot"></span>
+                                <p>очищение организма после алкоголя и нагрузок</p>
+                            </div>
+                            <div class="card-price">
+                                Цена: <strong>от 5 000 ₽</strong>
+                            </div>
+                            <button class="card-btn">Подробнее</button>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="hero-card">
+                            <div class="card-header">
+                                <div>
+                                    <span class="card-label">Капельница</span>
+                                    <h3 class="card-title">Энергия</h3>
+                                </div>
+                                <img src="design-assets/icon_energy.svg" alt="Энергия" class="card-icon energy-icon">
+                            </div>
+                            <div class="card-desc">
+                                <span class="desc-dot energy-dot"></span>
+                                <p>быстрое восстановление<br>сил и тонуса</p>
+                            </div>
+                            <div class="card-price">
+                                Цена: <strong>от 5 500 ₽</strong>
+                            </div>
+                            <button class="card-btn">Подробнее</button>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="hero-card">
+                            <div class="card-header">
+                                <div>
+                                    <span class="card-label">Капельница</span>
+                                    <h3 class="card-title">Золушка</h3>
+                                </div>
+                                <img src="design-assets/icon_beauty.svg" alt="Золушка" class="card-icon beauty-icon">
+                            </div>
+                            <div class="card-desc">
+                                <span class="desc-dot beauty-dot"></span>
+                                <p>сияние кожи, свежий вид</p>
+                            </div>
+                            <div class="card-price">
+                                Цена: <strong>от 5 900 ₽</strong>
+                            </div>
+                            <button class="card-btn">Подробнее</button>
+                        </div>
+                    </div>
+
+                    <div class="hero-actions">
+                        <button class="btn btn-primary btn-large js-open-drip-sheet" id="open-drip-sheet">Подобрать
+                            капельницу</button>
+                        <button class="btn btn-light-green btn-large js-open-consult-modal">Бесплатная консультация</button>
+                    </div>
+                </div>
+
+                <div class="hero-image-wrapper">
+                    <img src="design-assets/%D1%82%D0%BB%201.png?v=2" alt="Девушка" class="hero-image">
+                </div>
+            </div>
+            <img src="design-assets/%D1%84%D0%BE%D0%BD%20%D0%B3%D1%80%D1%83%D0%BF%D0%BF%D0%B0.png?v=2" alt=""
+                class="hero-bg-pattern">
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits" id="services">
+            <div class="container">
+                <h2 class="section-title">Что даёт инфузионная терапия?</h2>
+                <div class="benefits-wrapper">
+                    <div class="benefits-col benefits-left">
+                        <div class="benefit-card offset-right">
+                            <div class="benefit-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="#78D864" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <p>Эффект уже после первой процедуры</p>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22Z"
+                                        stroke="#78D864" stroke-width="2" />
+                                    <path d="M12 16V12" stroke="#78D864" stroke-width="2" stroke-linecap="round" />
+                                    <path d="M12 8H12.01" stroke="#78D864" stroke-width="2" stroke-linecap="round" />
+                                </svg>
+                            </div>
+                            <p>100% усвоение — витамины и препараты минуют ЖКТ</p>
+                        </div>
+                    </div>
+
+                    <!-- Центральная картинка -->
+                    <div class="benefits-center">
+                        <img src="design-assets/%D0%BA%D0%B0%D0%BF%D0%B5%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0.png"
+                            alt="Капельница" class="iv-bag-img">
+                    </div>
+
+                    <!-- Правая колонка карточек -->
+                    <div class="benefits-col benefits-right">
+                        <div class="benefit-card offset-left">
+                            <div class="benefit-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22Z"
+                                        stroke="#78D864" stroke-width="2" />
+                                    <path d="M12 6V12L16 14" stroke="#78D864" stroke-width="2" stroke-linecap="round" />
+                                </svg>
+                            </div>
+                            <p>5 капельниц = 3 месяца приема витаминов</p>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M12 4C13.1 4 14 3.1 14 2C14 0.9 13.1 0 12 0C10.9 0 10 0.9 10 2C10 3.1 10.9 4 12 4Z"
+                                        fill="#78D864" />
+                                    <path d="M16 8L12 12L8 8" stroke="#78D864" stroke-width="2"
+                                        stroke-linecap="round" />
+                                    <path d="M4 16H20" stroke="#78D864" stroke-width="2" stroke-linecap="round" />
+                                </svg>
+                            </div>
+                            <p>Без нагрузки на желудок и печень</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Консультация (Consultation Banner) -->
+        <section class="consultation">
+            <img src="design-assets/%D1%84%D0%BE%D0%BD%20%D0%B3%D1%80%D1%83%D0%BF%D0%BF%D0%B0.png?v=2" alt=""
+                class="consultation-bg-pattern">
+            <div class="consultation-container">
+                <div class="consultation-content">
+                    <h2 class="consultation-title">Не знаете какая капельница<br>или процедура вам подойдет?</h2>
+                    <p class="consultation-subtitle">Оставьте заявку, наш специалист перезвонит вам и бесплатно
+                        проконсультирует вас</p>
+
+                    <form class="consultation-form" action="backend/process.php" method="POST" id="consultation-form">
+                        <input type="hidden" name="action" value="consultation">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" name="name" class="form-input" placeholder="Ваше имя" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" name="phone" class="form-input" placeholder="Ваш номер телефона"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" class="form-input" placeholder="Ваш email" required>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-submit">Отправить заявку</button>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="agreement" required checked class="custom-checkbox-input">
+                                <span class="custom-checkbox">
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M11.6666 3.5L5.24992 9.91667L2.33325 7" stroke="white" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                <span class="checkbox-text">
+                                    Нажимая кнопку я соглашаюсь с <a href="#">политикой конфиденциальности</a> и <a
+                                        href="#">пользовательским соглашением</a>
+                                </span>
+                            </label>
+                        </div>
+                    </form>
+                    <div id="form-error" class="form-message error-message"
+                        style="display: none; color: #ff3b3b; margin-top: 15px; font-weight: 500;"></div>
+                    <div id="form-success" class="form-message success-message"
+                        style="display: none; color: #2ecc71; margin-top: 15px; font-weight: 500;"></div>
+                </div>
+
+                <div class="consultation-image">
+                    <!-- Фото врача -->
+                    <img src="design-assets/%D0%96%D0%B5%D0%BD%D1%89%D0%B8%D0%BD%D0%B0%203%20%D0%B1%D0%BB%D0%BE%D0%BA%20.png"
+                        alt="Врач" class="doctor-img">
+                </div>
+            </div>
+        </section>
+
+        <!-- Текстовый блок (Статья) -->
+        <section class="article-section" id="articles">
+            <h2 class="article-title">Текстовый блок</h2>
+            <div class="container article-container">
+                <div class="article-content">
+
+                    <div class="article-body">
+                        <p>Приятно, граждане, наблюдать, как многие известные личности своевременно верифицированы.
+                            Господа, высококачественный прототип будущего проекта играет определяющее значение для
+                            вывода текущих активов. Наше дело не так однозначно, как может показаться: постоянное
+                            информационно-пропагандистское обеспечение нашей деятельности способствует повышению
+                            качества экспериментов, поражающих по своей масштабности и грандиозности. Кстати,
+                            реплицированные с зарубежных источников, современные исследования формируют глобальную
+                            экономическую сеть и при этом — объявлены нарушающими общечеловеческие нормы этики и морали.
+                        </p>
+
+                        <p>В целом, конечно, синтетическое тестирование предопределяет высокую <strong
+                                class="text-green">востребованность экономической целесообразности</strong> принимаемых
+                            решений. Наше дело не так однозначно, как может показаться: убеждённость некоторых
+                            оппонентов говорит о возможностях модели развития. Однозначно, предприниматели в сети
+                            интернет своевременно верифицированы.</p>
+
+                        <p>Наше дело не так однозначно, как может показаться:</p>
+
+                        <ul class="article-list">
+                            <li>информационно-пропагандистское обеспечение нашей деятельности</li>
+                            <li>предприниматели в сети интернет</li>
+                            <li>реплицированные с зарубежных источников, современные исследования</li>
+                            <li>убеждённость некоторых оппонентов говорит о возможностях модели развития</li>
+                            <li>определяющее значение для вывода текущих активов</li>
+                        </ul>
+
+                        <div class="article-quote-box">
+                            <div class="quote-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="#78D864" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <p>Ясность нашей позиции очевидна: курс на социально-ориентированный национальный проект
+                                однозначно фиксирует необходимость дальнейших направлений развития. В своём стремлении
+                                повысить качество жизни, они забывают, что социально-экономическое развитие в
+                                значительной степени обусловливает важность экономической целесообразности принимаемых
+                                решений.</p>
+                        </div>
+
+                        <p>Приятно, граждане, наблюдать, как многие известные личности своевременно верифицированы.
+                            Господа, высококачественный прототип будущего проекта играет определяющее значение для
+                            вывода текущих активов. Наше дело не так однозначно, как может показаться: постоянное
+                            информационно-пропагандистское обеспечение нашей деятельности способствует повышению
+                            качества экспериментов, поражающих по своей масштабности и грандиозности.</p>
+
+                        <p>Разнообразный и богатый опыт говорит нам, что курс на социально-ориентированный национальный
+                            проект:</p>
+
+                        <ol class="article-ordered-list">
+                            <li><span>01</span> Информационно-пропагандистское обеспечение нашей деятельности</li>
+                            <li><span>02</span> Предприниматели в сети интернет</li>
+                            <li><span>03</span> Реплицированные с зарубежных источников, современные исследования</li>
+                            <li><span>04</span> Убеждённость некоторых оппонентов говорит о возможностях модели развития
+                            </li>
+                            <li><span>05</span> Определяющее значение для вывода текущих активов некоторых оппонентов
+                                говорит о возможностях модели развития</li>
+                        </ol>
+
+                        <p>В целом, конечно, синтетическое тестирование предопределяет высокую востребованность
+                            экономической целесообразности принимаемых решений. Наше дело не так однозначно, как может
+                            показаться: убеждённость некоторых оппонентов говорит о возможностях модели развития.
+                            Однозначно, предприниматели в сети интернет своевременно верифицированы.</p>
+                    </div>
+
+                    <h3 class="article-subtitle">Текстовый блок H3</h3>
+
+                    <div class="article-body">
+                        <p>Приятно, граждане, наблюдать, как многие известные личности своевременно верифицированы.
+                            Господа, высококачественный прототип будущего проекта играет определяющее значение для
+                            вывода текущих активов. Наше дело не так однозначно, как может показаться: постоянное
+                            информационно-пропагандистское обеспечение нашей деятельности способствует повышению
+                            качества экспериментов, поражающих по своей масштабности и грандиозности. Кстати,
+                            реплицированные с зарубежных источников, современные исследования формируют глобальную
+                            экономическую сеть и при этом — объявлены нарушающими общечеловеческие нормы этики и морали.
+                        </p>
+
+                        <p>В целом, конечно, синтетическое тестирование предопределяет высокую востребованность
+                            экономической целесообразности принимаемых решений. Наше дело не так однозначно, как может
+                            показаться: <strong class="text-green">убеждённость некоторых оппонентов</strong> говорит о
+                            возможностях модели развития. Однозначно, предприниматели в сети интернет своевременно
+                            верифицированы.</p>
+
+                        <div class="article-author-quote">
+                            <div class="author-quote-content">
+                                <div class="quote-mark">“</div>
+                                <p>Ясность нашей позиции очевидна: курс на социально-ориентированный национальный проект
+                                    однозначно фиксирует необходимость дальнейших направлений развития. В своём
+                                    стремлении повысить качество жизни, они забывают, что социально-экономическое
+                                    развитие в значительной степени обусловливает важность экономической
+                                    целесообразности принимаемых решений.</p>
+                            </div>
+                            <div class="author-info-divider"></div>
+                            <div class="author-info">
+                                <div class="author-photo-frame">
+                                    <img src="design-assets/9c9088d7dec0de2d422933c744a31ed848d8ca1c.png" alt="Врач"
+                                        class="author-photo">
+                                </div>
+                                <div class="author-details">
+                                    <div class="author-name-role">
+                                        <h4 class="author-name">Константинопольский Константин Константинович</h4>
+                                        <span class="author-role">Главный врач клиники, психиатр-нарколог</span>
+                                    </div>
+                                    <span class="author-exp">Опыт работы: 13 лет</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p>В целом, конечно, синтетическое тестирование предопределяет высокую востребованность
+                            экономической целесообразности принимаемых решений. Наше дело не так однозначно, как может
+                            показаться: убеждённость некоторых оппонентов говорит о возможностях модели развития.
+                            Однозначно, предприниматели в сети интернет своевременно верифицированы.</p>
+                    </div>
+                </div>
+
+                <div class="article-images">
+                    <img src="design-assets/977ba067662996a3a8613112e7512b653bc315f4.jpg" alt="Фото процедуры"
+                        class="article-img article-img-1">
+                    <!-- Added a spacer or push to bottom if necessary based on Figma (img is at the bottom of the container) -->
+                    <img src="design-assets/456dc2868804b16e0d106303312781073fec7521.jpg" alt="Врач и пациент"
+                        class="article-img article-img-2">
+                </div>
+            </div>
+        </section>
+
+        <!-- Licenses Section -->
+        <section class="licenses-section">
+            <div class="licenses-content">
+                <div class="licenses-text-block">
+                    <div class="licenses-title-desc">
+                        <h2 class="licenses-title">Лицензии клиники АкваМед</h2>
+                        <div class="licenses-desc">
+                            <p>Клиника работает на основании медицинской лицензии и всех необходимых разрешений.
+                                Работаем с пациентами на основе заключения договора о предоставлении медицинских услуг -
+                                прозрачно, безопасно и с защитой вашего здоровья.</p>
+                            <p>Мы используем только сертифицированные препараты и соблюдаем стандарты Министерства
+                                здравоохранения РФ. Медицинская лицензия ООО «Кристалл» Л041-01148-78/00347913</p>
+                        </div>
+                    </div>
+
+                    <div class="licenses-nav">
+                        <button class="slider-btn slider-btn-prev" aria-label="Предыдущий слайд">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="19" y1="12" x2="5" y2="12"></line>
+                                <polyline points="12 19 5 12 12 5"></polyline>
+                            </svg>
+                        </button>
+                        <button class="slider-btn slider-btn-next" aria-label="Следующий слайд">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="licenses-slider-container">
+                    <div class="licenses-slider">
+                        <!-- License Card 1 -->
+                        <div class="license-card">
+                            <div class="license-img-wrapper">
+                                <img src="design-assets/4e91e544e9c8cc2c025212ed7c847b55fa6b9f49.png" alt="Лицензия 1"
+                                    class="license-img">
+                            </div>
+                            <div class="license-caption">
+                                <p>Приятно, граждане, наблюдать, как многие известные личности своевременно
+                                    верифицированы</p>
+                            </div>
+                        </div>
+                        <!-- License Card 2 -->
+                        <div class="license-card">
+                            <div class="license-img-wrapper">
+                                <img src="design-assets/image 4.png" alt="Лицензия 2" class="license-img">
+                            </div>
+                            <div class="license-caption">
+                                <p>Приятно, граждане, наблюдать, как многие известные личности своевременно
+                                    верифицированы</p>
+                            </div>
+                        </div>
+                        <!-- License Card 3 -->
+                        <div class="license-card">
+                            <div class="license-img-wrapper">
+                                <img src="design-assets/image%20%D0%B04.png" alt="Лицензия 3" class="license-img">
+                            </div>
+                            <div class="license-caption">
+                                <p>Приятно, граждане, наблюдать, как многие известные личности своевременно
+                                    верифицированы</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="faq-container">
+                <h2 class="faq-title">Отвечаем на ваши вопросы</h2>
+                <div class="faq-list">
+                    <!-- FAQ Item 1 (Active) -->
+                    <div class="faq-item active">
+                        <div class="faq-header">
+                            <h3 class="faq-question">Существуют ли в клинике пакетные предложения или скидки?</h3>
+                            <button class="faq-toggle" aria-label="Закрыть ответ">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004728"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="faq-body">
+                            <div class="faq-answer-content">
+                                <p class="faq-answer-text">Клиника работает на основании медицинской лицензии и всех
+                                    необходимых разрешений. Работаем с пациентами на основе заключения договора о
+                                    предоставлении медицинских услуг - прозрачно, безопасно и с защитой вашего здоровья.
+                                </p>
+                                <div class="faq-separator"></div>
+                                <div class="faq-author">
+                                    <div class="faq-author-photo-frame">
+                                        <img src="design-assets/9c9088d7dec0de2d422933c744a31ed848d8ca1c.png" alt="Врач"
+                                            class="faq-author-photo">
+                                    </div>
+                                    <div class="faq-author-info">
+                                        <div class="faq-author-name-role">
+                                            <h4 class="faq-author-name">Константинопольский Константин Константинович
+                                            </h4>
+                                            <span class="faq-author-role">Главный врач клиники, психиатр-нарколог</span>
+                                        </div>
+                                        <span class="faq-author-exp">Опыт работы: 13 лет</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="faq-decorative-bg"></div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div class="faq-item">
+                        <div class="faq-header">
+                            <h3 class="faq-question">Клиника работает на основании медицинской лицензии и всех
+                                необходимых разрешений?</h3>
+                            <button class="faq-toggle" aria-label="Открыть ответ">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004728"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="faq-body">
+                            <div class="faq-answer-content">
+                                <p class="faq-answer-text">Да, клиника имеет все необходимые лицензии для осуществления
+                                    медицинской деятельности.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 3 -->
+                    <div class="faq-item">
+                        <div class="faq-header">
+                            <h3 class="faq-question">Существуют ли в клинике пакетные предложения или скидки?</h3>
+                            <button class="faq-toggle" aria-label="Открыть ответ">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004728"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="faq-body">
+                            <div class="faq-answer-content">
+                                <p class="faq-answer-text">Мы регулярно проводим акции и предлагаем выгодные пакетные
+                                    решения для наших пациентов. Уточняйте актуальные предложения у администраторов.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 4 -->
+                    <div class="faq-item">
+                        <div class="faq-header">
+                            <h3 class="faq-question">Клиника работает на основании медицинской лицензии?</h3>
+                            <button class="faq-toggle" aria-label="Открыть ответ">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004728"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="faq-body">
+                            <div class="faq-answer-content">
+                                <p class="faq-answer-text">Да, клиника имеет все необходимые лицензии для осуществления
+                                    медицинской деятельности.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 5 -->
+                    <div class="faq-item">
+                        <div class="faq-header">
+                            <h3 class="faq-question">Существуют ли в клинике пакетные предложения или скидки?</h3>
+                            <button class="faq-toggle" aria-label="Открыть ответ">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004728"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="faq-body">
+                            <div class="faq-answer-content">
+                                <p class="faq-answer-text">Мы регулярно проводим акции и предлагаем выгодные пакетные
+                                    решения для наших пациентов. Уточняйте актуальные предложения у администраторов.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <div class="footer-logo">
+                    <img src="design-assets/Group 14.svg" alt="АкваМед" class="footer-logo-img">
+                    <div class="footer-logo-text">
+                        <span class="footer-logo-title">АкваМед</span>
+                        <span class="footer-logo-subtitle">Клиника капельниц</span>
+                    </div>
+                </div>
+                <div class="footer-actions">
+                    <div class="footer-search">
+                        <input type="text" placeholder="Поиск по сайту" class="footer-search-input">
+                        <button class="footer-search-btn" aria-label="Поиск">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004728"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    <button class="footer-btn js-open-drip-sheet">Капельница на дому</button>
+                </div>
+                <div class="footer-socials-group">
+                    <div class="footer-socials">
+                        <a href="#" class="footer-social-link" aria-label="VK">
+                            <img src="design-assets/socials vk.svg" alt="VK" class="footer-social-img">
+                        </a>
+                        <a href="#" class="footer-social-link" aria-label="Telegram">
+                            <img src="design-assets/socials tg.svg" alt="Telegram" class="footer-social-img">
+                        </a>
+                        <a href="#" class="footer-social-link" aria-label="OK">
+                            <img src="design-assets/Vector OK.svg" alt="OK"
+                                class="footer-social-img footer-social-img-ok">
+                        </a>
+                    </div>
+                    <a href="#" class="footer-vision-link" aria-label="Версия для слабовидящих">
+                        <img src="design-assets/Group 12 glaz.svg" alt="Версия для слабовидящих" width="27" height="22">
+                    </a>
+                </div>
+                <div class="footer-nav-links">
+                    <a href="#">Карта сайта</a>
+                    <a href="#">Политика конфиденциальности</a>
+                </div>
+                <div class="footer-copyright">
+                    <p>© 2025 Все права защищены</p>
+                    <p>Официальный медицинский сайт клиники капельниц и инфузионной терапии «Аквамед» в Москве.</p>
+                </div>
+            </div>
+
+            <div class="footer-right">
+                <div class="footer-right-top">
+                    <div class="footer-col footer-col-accordion">
+                        <div class="footer-col-header">
+                            <h4 class="footer-col-title">О клинике</h4>
+                            <button class="footer-col-toggle" aria-label="Открыть">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004728"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <ul class="footer-list footer-col-body">
+                            <li><a href="#">О нас</a></li>
+                            <li><a href="#">Специалисты</a></li>
+                            <li><a href="#">Отзывы</a></li>
+                            <li><a href="#">Фотогалерея</a></li>
+                            <li><a href="#">Цены</a></li>
+                            <li><a href="#">Акции</a></li>
+                            <li><a href="#">Статьи</a></li>
+                            <li><a href="#">Ответы на вопросы</a></li>
+                            <li><a href="#">Лицензии</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col footer-col-accordion">
+                        <div class="footer-col-header">
+                            <h4 class="footer-col-title">Капельницы</h4>
+                            <button class="footer-col-toggle" aria-label="Открыть">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004728"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <ul class="footer-list footer-col-body">
+                            <li><a href="#">Капельница Детокс</a></li>
+                            <li><a href="#">Капельница Энергия</a></li>
+                            <li><a href="#">Капельница Золушка</a></li>
+                            <li><a href="#">Капельница Детокс</a></li>
+                            <li><a href="#">Капельница Энергия</a></li>
+                            <li><a href="#">Капельница Золушка</a></li>
+                            <li><a href="#">Капельница Детокс</a></li>
+                            <li><a href="#">Капельница Энергия</a></li>
+                            <li><a href="#">Капельница Золушка</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col footer-contacts footer-col-accordion">
+                        <div class="footer-col-header">
+                            <h4 class="footer-col-title">Контактные данные</h4>
+                            <button class="footer-col-toggle" aria-label="Открыть">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004728"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="footer-contacts-wrap footer-col-body">
+                            <div class="footer-contact-item">
+                                <div class="footer-contact-icon">
+                                    <img src="design-assets/Group 13 telef.svg" alt="Телефон" width="22" height="22">
+                                </div>
+                                <div class="footer-contact-info">
+                                    <span class="footer-contact-label">Телефон</span>
+                                    <a href="tel:+78008899999" class="footer-contact-value">+7 (800) 889-99-99</a>
+                                </div>
+                            </div>
+                            <div class="footer-contact-item">
+                                <div class="footer-contact-icon">
+                                    <img src="design-assets/Group 13.svg" alt="Адрес" width="19" height="23">
+                                </div>
+                                <div class="footer-contact-info">
+                                    <span class="footer-contact-label">Адрес</span>
+                                    <span class="footer-contact-value">Санкт-Петербург, ул. Авиаконструкторов
+                                        45к1</span>
+                                </div>
+                            </div>
+                            <div class="footer-contact-item">
+                                <div class="footer-contact-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#78d864"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path
+                                            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                        </path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="footer-contact-info">
+                                    <span class="footer-contact-label">Электронная почта</span>
+                                    <a href="mailto:info@kapelnica-med.ru"
+                                        class="footer-contact-value">info@kapelnica-med.ru</a>
+                                </div>
+                            </div>
+                            <div class="footer-contact-item">
+                                <div class="footer-contact-icon">
+                                    <img src="design-assets/Group 12.svg" alt="Время работы" width="22" height="22">
+                                </div>
+                                <div class="footer-contact-info">
+                                    <span class="footer-contact-label">Время работы</span>
+                                    <span class="footer-contact-value">Круглосуточно, 24/7</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-right-bottom">
+                    <p>Сайт носит исключительно информационный характер и не является публичной офертой.
+                        Консультационные услуги, оказываемые по телефону, мессенджерам и в соцсетях носят исключительно
+                        информационный характер и не являются медицинскими услугами. Медицинская помощь оказывается в
+                        домашних условиях по адресу и месту нахождения пациента и месту вызова врача.</p>
+                    <p>Медицинские услуги оказываются по лицензии клиники-партнера ООО «Кристалл» Л041-01148-78/00347913
+                        ИНН: 7811740190</p>
+                    <p>Адрес оказания медицинских услуг в стационаре : 192148, Россия. г. Санкт-Петербург, улица Седова,
+                        дом 37, литер А, помещение 20-Н. 21-Н, офис 17</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="sheet-overlay" id="dripSheet" aria-hidden="true">
+        <div class="sheet-backdrop" data-sheet-close></div>
+        <div class="drip-sheet" role="dialog" aria-modal="true" aria-labelledby="dripSheetTitle">
+            <button class="sheet-close" type="button" data-sheet-close aria-label="Закрыть">
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="sheet-state sheet-state-form is-active" data-sheet-state="form">
+                <div class="sheet-copy">
+                    <h2 class="sheet-title" id="dripSheetTitle">Не знаете какая капельница или процедура вам подойдет?
+                    </h2>
+                    <p class="sheet-subtitle">Оставьте заявку, наш специалист перезвонит вам и бесплатно
+                        проконсультирует вас</p>
+                </div>
+                <form class="sheet-form" id="dripSheetForm" action="backend/process.php" method="POST" novalidate>
+                    <input type="hidden" name="action" value="drip_selection">
+                    <div class="sheet-form-row">
+                        <input class="sheet-input" type="text" name="name" placeholder="Ваше имя" autocomplete="name"
+                            required>
+                        <input class="sheet-input" type="tel" name="phone" placeholder="Ваш номер телефона"
+                            autocomplete="tel" required>
+                        <input class="sheet-input" type="email" name="email" placeholder="Ваш email"
+                            autocomplete="email" required>
+                    </div>
+                    <div class="sheet-form-actions">
+                        <button class="sheet-submit" type="submit">Отправить заявку</button>
+                        <label class="sheet-agreement">
+                            <input class="sheet-checkbox" type="checkbox" name="agreement" checked required>
+                            <span class="sheet-checkbox-mark"></span>
+                            <span>Нажимая кнопку я соглашаюсь с <a href="#">политикой конфиденциальности</a> и <a
+                                    href="#">пользовательским соглашением</a></span>
+                        </label>
+                    </div>
+                </form>
+            </div>
+
+            <div class="sheet-state sheet-state-result" data-sheet-state="success">
+                <div class="sheet-result-icon sheet-result-icon-success" aria-hidden="true">
+                    <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                        <circle cx="28" cy="28" r="28" fill="white" />
+                        <path d="M17 28.5L24.5 36L39.5 20" stroke="#007844" stroke-width="4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <h2 class="sheet-result-title">Заявка успешно отправлена!</h2>
+                <button class="sheet-result-button" type="button" data-sheet-close>Хорошо</button>
+            </div>
+
+            <div class="sheet-state sheet-state-result" data-sheet-state="error">
+                <div class="sheet-result-icon sheet-result-icon-error" aria-hidden="true">
+                    <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                        <circle cx="28" cy="28" r="28" fill="white" />
+                        <path d="M20 20L36 36M36 20L20 36" stroke="#007844" stroke-width="4" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <h2 class="sheet-result-title">Произошла ошибка</h2>
+                <button class="sheet-result-button" type="button" data-sheet-retry>Повторить попытку</button>
+            </div>
+        </div>
+    </div>
+    <div class="sheet-overlay consultation-overlay" id="consultationModal" aria-hidden="true">
+        <div class="sheet-backdrop" data-consult-close></div>
+        <div class="consultation-sheet" role="dialog" aria-modal="true" aria-labelledby="consultTitle">
+            <button class="sheet-close consultation-close" type="button" data-consult-close aria-label="Закрыть">
+                <span></span>
+                <span></span>
+            </button>
+            <div class="consultation-content">
+                <!-- Left Column -->
+                <div class="consultation-left">
+                    <h2 class="consultation-heading" id="consultTitle">Бесплатная консультация<br>и подбор инфузионной
+                        терапии</h2>
+                    <ul class="consultation-features">
+                        <li>
+                            <div class="consultation-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z"
+                                        stroke="white" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M14 2V8H20" stroke="white" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M16 13H8" stroke="white" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M16 17H8" stroke="white" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M10 9H8" stroke="white" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <span>Проводим оценку состояния, определяем показания и назначаем курс капельниц под
+                                контролем врача</span>
+                        </li>
+                        <li>
+                            <div class="consultation-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M21 16V8C20.9996 7.64927 20.9071 7.30671 20.7315 7.00622C20.556 6.70573 20.3033 6.45747 20 6.28L13 2.28C12.6955 2.10271 12.3516 2.00934 12 2.00934C11.6484 2.00934 11.3045 2.10271 11 2.28L4 6.28C3.69666 6.45747 3.44401 6.70573 3.26846 7.00622C3.09292 7.30671 3.00036 7.64927 3 8V16C3.00036 16.3507 3.09292 16.6933 3.26846 16.9938C3.44401 17.2943 3.69666 17.5425 4 17.72L11 21.72C11.3045 21.8973 11.6484 21.9907 12 21.9907C12.3516 21.9907 12.6955 21.8973 13 21.72L20 17.72C20.3033 17.5425 20.556 17.2943 20.7315 16.9938C20.9071 16.6933 20.9996 16.3507 21 16Z"
+                                        stroke="white" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M12 22V12" stroke="white" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M12 12L20.5 7" stroke="white" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M12 12L3.5 7" stroke="white" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <span>Используем препараты, одобренные для клинического применения</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Right Column (Form) -->
+                <div class="consultation-right">
+                    <div class="sheet-state consultation-state-form is-active" data-consult-state="form">
+                        <h3 class="consultation-form-title">Записаться на бесплатную консультацию</h3>
+                        <p class="consultation-form-subtitle">Оставьте контакты — медицинский специалист свяжется с вами
+                            для уточнения анамнеза и подбора терапии</p>
+
+                        <form class="consultation-form" id="consultForm" action="backend/process.php" method="POST"
+                            novalidate>
+                            <input type="hidden" name="action" value="consultation_request">
+                            <div class="consultation-form-row">
+                                <input class="sheet-input consultation-input" type="text" name="name"
+                                    placeholder="Ваше имя" autocomplete="name" required>
+                                <input class="sheet-input consultation-input" type="tel" name="phone"
+                                    placeholder="Ваш номер телефона" autocomplete="tel" required>
+                                <input class="sheet-input consultation-input" type="email" name="email"
+                                    placeholder="Ваш email" autocomplete="email" required>
+                            </div>
+                            <div class="consultation-form-actions">
+                                <button class="sheet-submit consultation-submit" type="submit">Отправить заявку</button>
+                                <label class="sheet-agreement consultation-agreement">
+                                    <input class="sheet-checkbox consultation-checkbox" type="checkbox" name="agreement"
+                                        checked required>
+                                    <span class="sheet-checkbox-mark consultation-checkbox-mark"></span>
+                                    <span class="consultation-agreement-text">Нажимая кнопку я соглашаюсь с <a
+                                            href="#">политикой конфиденциальности</a> и <a href="#">пользовательским
+                                            соглашением</a></span>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="sheet-state consultation-state-result" data-consult-state="success">
+                        <div class="sheet-result-icon sheet-result-icon-success">
+                            <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                                <circle cx="28" cy="28" r="28" fill="#007844" />
+                                <path d="M17 28.5L24.5 36L39.5 20" stroke="white" stroke-width="4"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <h2 class="sheet-result-title">Заявка успешно отправлена!</h2>
+                    </div>
+
+                    <div class="sheet-state consultation-state-result" data-consult-state="error">
+                        <div class="sheet-result-icon sheet-result-icon-error">
+                            <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                                <circle cx="28" cy="28" r="28" fill="#E53935" />
+                                <path d="M20 20L36 36M36 20L20 36" stroke="white" stroke-width="4"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <h2 class="sheet-result-title">Ошибка отправки!</h2>
+                        <button class="sheet-result-button" data-consult-retry>Попробовать снова</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/main.js?v=7"></script>
+        
+    
+    <!-- Search Dropdown -->
+    <div class="search-dropdown" id="searchDropdown">
+        <div class="search-dropdown-header">
+            <input type="text" id="globalSearchInput" class="search-dropdown-input" placeholder="Поиск по услугам..." autocomplete="off">
+            <button class="search-dropdown-close" id="searchDropdownClose" aria-label="Закрыть">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="search-dropdown-body">
+            <div class="search-hints" id="searchHints">
+                <p class="search-hints-title">Например, вы искали:</p>
+                <div class="search-hints-tags">
+                    <span class="search-hint-tag">Мигрень</span>
+                    <span class="search-hint-tag">Слабость</span>
+                    <span class="search-hint-tag">Детокс</span>
+                    <span class="search-hint-tag">Витамины</span>
+                </div>
+            </div>
+            <div class="search-results-list" id="searchResults"></div>
+            <div class="search-no-results" id="searchNoResults" style="display: none;">
+                По вашему запросу ничего не найдено.
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
