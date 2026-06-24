@@ -44,7 +44,7 @@ function renderMessageText($req) {
     
     $text = "{$status_emoji} <b>Заявка #{$req['id']}!</b>\n\n"
           . "👤 <b>Имя:</b> " . htmlspecialchars($req['name']) . "\n"
-          . "📞 <b>Телефон:</b> " . htmlspecialchars($req['phone']) . "\n"
+          . "📞 <b>Телефон:</b> <code>" . htmlspecialchars($req['phone']) . "</code>\n"
           . "✉️ <b>Email:</b> " . htmlspecialchars($req['email']) . "\n\n"
           . "ℹ️ <i>Статус: {$status_text}</i>";
           
@@ -93,23 +93,46 @@ while (true) {
                             'text' => "✅ CRM-режим активирован.\nВоспользуйтесь меню ниже для управления заявками:",
                             'reply_markup' => $main_keyboard
                         ]);
+                    } elseif (preg_match('/^\/manage_(\d+)$/', $text, $matches)) {
+                        // Обработка команды /manage_ID
+                        $req_id = intval($matches[1]);
+                        $stmt = $pdo->prepare("SELECT * FROM requests WHERE id = ?");
+                        $stmt->execute([$req_id]);
+                        $req = $stmt->fetch(PDO::FETCH_ASSOC);
+                        
+                        if ($req) {
+                            $markup = [ 'inline_keyboard' => [] ];
+                            if ($req['status'] === 'new') {
+                                $markup['inline_keyboard'][] = [['text' => '✅ Отметить обработанной', 'callback_data' => "close_{$req['id']}"]];
+                            }
+                            $markup['inline_keyboard'][] = [['text' => '💬 Оставить комментарий', 'callback_data' => "comment_{$req['id']}"]];
+
+                            tgRequest('sendMessage', [
+                                'chat_id' => $chat_id,
+                                'text' => renderMessageText($req),
+                                'parse_mode' => 'HTML',
+                                'reply_markup' => $markup
+                            ]);
+                        } else {
+                            tgRequest('sendMessage', ['chat_id' => $chat_id, 'text' => "Заявка не найдена."]);
+                        }
                     }
                     
                     // Обработка кнопок меню
                     $query = null;
                     $header_msg = "";
                     if ($text === '🟢 Активные заявки') {
-                        $query = "SELECT * FROM requests WHERE status='new' ORDER BY id DESC LIMIT 10";
-                        $header_msg = "🟢 <b>Последние 10 активных заявок:</b>";
+                        $query = "SELECT * FROM requests WHERE status='new' ORDER BY id DESC LIMIT 15";
+                        $header_msg = "🟢 <b>Последние 15 активных заявок:</b>";
                     } elseif ($text === '📋 Все заявки') {
-                        $query = "SELECT * FROM requests ORDER BY id DESC LIMIT 10";
-                        $header_msg = "📋 <b>Последние 10 заявок:</b>";
+                        $query = "SELECT * FROM requests ORDER BY id DESC LIMIT 15";
+                        $header_msg = "📋 <b>Последние 15 заявок:</b>";
                     } elseif ($text === '✅ Обработанные') {
-                        $query = "SELECT * FROM requests WHERE status='processed' ORDER BY id DESC LIMIT 10";
-                        $header_msg = "✅ <b>Последние 10 обработанных заявок:</b>";
+                        $query = "SELECT * FROM requests WHERE status='processed' ORDER BY id DESC LIMIT 15";
+                        $header_msg = "✅ <b>Последние 15 обработанных заявок:</b>";
                     } elseif ($text === '💬 С комментариями') {
-                        $query = "SELECT * FROM requests WHERE comment IS NOT NULL AND comment != '' ORDER BY id DESC LIMIT 10";
-                        $header_msg = "💬 <b>Последние 10 заявок с комментариями:</b>";
+                        $query = "SELECT * FROM requests WHERE comment IS NOT NULL AND comment != '' ORDER BY id DESC LIMIT 15";
+                        $header_msg = "💬 <b>Последние 15 заявок с комментариями:</b>";
                     }
 
                     if ($query) {
@@ -121,22 +144,24 @@ while (true) {
                                 'reply_markup' => $main_keyboard
                             ]);
                         } else {
-                            tgRequest('sendMessage', ['chat_id' => $chat_id, 'text' => $header_msg, 'parse_mode' => 'HTML', 'reply_markup' => $main_keyboard]);
-                            foreach (array_reverse($reqs) as $req) { // Показываем старые сверху, новые снизу
-                                $markup = [ 'inline_keyboard' => [] ];
-                                if ($req['status'] === 'new') {
-                                    $markup['inline_keyboard'][] = [['text' => '✅ Отметить обработанной', 'callback_data' => "close_{$req['id']}"]];
-                                }
-                                $markup['inline_keyboard'][] = [['text' => '💬 Оставить комментарий', 'callback_data' => "comment_{$req['id']}"]];
-
-                                tgRequest('sendMessage', [
-                                    'chat_id' => $chat_id,
-                                    'text' => renderMessageText($req),
-                                    'parse_mode' => 'HTML',
-                                    'reply_markup' => $markup
-                                ]);
-                                usleep(100000); // небольшая пауза чтобы не спамить API
+                            $msg = $header_msg . "\n\n";
+                            foreach ($reqs as $req) {
+                                $status_emoji = $req['status'] === 'new' ? '🔴' : '✅';
+                                $comment = empty($req['comment']) ? '<i>нет</i>' : htmlspecialchars($req['comment']);
+                                $phone = htmlspecialchars($req['phone']);
+                                $name = htmlspecialchars($req['name']);
+                                
+                                $msg .= "{$status_emoji} <b>#{$req['id']}</b> | {$name} | <code>{$phone}</code>\n";
+                                $msg .= "📝 Коммент: {$comment}\n";
+                                $msg .= "👉 Управление: /manage_{$req['id']}\n\n";
                             }
+                            
+                            tgRequest('sendMessage', [
+                                'chat_id' => $chat_id, 
+                                'text' => $msg, 
+                                'parse_mode' => 'HTML', 
+                                'reply_markup' => $main_keyboard
+                            ]);
                         }
                     }
                     
