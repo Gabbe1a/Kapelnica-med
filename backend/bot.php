@@ -74,14 +74,70 @@ while (true) {
                     $chat_id = $update['message']['chat']['id'];
                     $text = trim($update['message']['text']);
                     
+                    // Главное меню
+                    $main_keyboard = [
+                        'keyboard' => [
+                            [['text' => '🟢 Активные заявки'], ['text' => '📋 Все заявки']],
+                            [['text' => '✅ Обработанные'], ['text' => '💬 С комментариями']]
+                        ],
+                        'resize_keyboard' => true,
+                        'is_persistent' => true
+                    ];
+
                     if ($text === '/start') {
                         $stmt = $pdo->prepare("INSERT IGNORE INTO tg_subscribers (chat_id) VALUES (?)");
                         $stmt->execute([$chat_id]);
                         
                         tgRequest('sendMessage', [
                             'chat_id' => $chat_id,
-                            'text' => "✅ CRM-режим активирован. Вы будете получать заявки с кнопками управления."
+                            'text' => "✅ CRM-режим активирован.\nВоспользуйтесь меню ниже для управления заявками:",
+                            'reply_markup' => $main_keyboard
                         ]);
+                    }
+                    
+                    // Обработка кнопок меню
+                    $query = null;
+                    $header_msg = "";
+                    if ($text === '🟢 Активные заявки') {
+                        $query = "SELECT * FROM requests WHERE status='new' ORDER BY id DESC LIMIT 10";
+                        $header_msg = "🟢 <b>Последние 10 активных заявок:</b>";
+                    } elseif ($text === '📋 Все заявки') {
+                        $query = "SELECT * FROM requests ORDER BY id DESC LIMIT 10";
+                        $header_msg = "📋 <b>Последние 10 заявок:</b>";
+                    } elseif ($text === '✅ Обработанные') {
+                        $query = "SELECT * FROM requests WHERE status='processed' ORDER BY id DESC LIMIT 10";
+                        $header_msg = "✅ <b>Последние 10 обработанных заявок:</b>";
+                    } elseif ($text === '💬 С комментариями') {
+                        $query = "SELECT * FROM requests WHERE comment IS NOT NULL AND comment != '' ORDER BY id DESC LIMIT 10";
+                        $header_msg = "💬 <b>Последние 10 заявок с комментариями:</b>";
+                    }
+
+                    if ($query) {
+                        $reqs = $pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
+                        if (empty($reqs)) {
+                            tgRequest('sendMessage', [
+                                'chat_id' => $chat_id,
+                                'text' => "🤷‍♂️ По этому запросу заявок не найдено.",
+                                'reply_markup' => $main_keyboard
+                            ]);
+                        } else {
+                            tgRequest('sendMessage', ['chat_id' => $chat_id, 'text' => $header_msg, 'parse_mode' => 'HTML', 'reply_markup' => $main_keyboard]);
+                            foreach (array_reverse($reqs) as $req) { // Показываем старые сверху, новые снизу
+                                $markup = [ 'inline_keyboard' => [] ];
+                                if ($req['status'] === 'new') {
+                                    $markup['inline_keyboard'][] = [['text' => '✅ Отметить обработанной', 'callback_data' => "close_{$req['id']}"]];
+                                }
+                                $markup['inline_keyboard'][] = [['text' => '💬 Оставить комментарий', 'callback_data' => "comment_{$req['id']}"]];
+
+                                tgRequest('sendMessage', [
+                                    'chat_id' => $chat_id,
+                                    'text' => renderMessageText($req),
+                                    'parse_mode' => 'HTML',
+                                    'reply_markup' => $markup
+                                ]);
+                                usleep(100000); // небольшая пауза чтобы не спамить API
+                            }
+                        }
                     }
                     
                     // Обработка ответа (ForceReply) для комментария
