@@ -54,6 +54,17 @@ function renderMessageText($req) {
     return $text;
 }
 
+// Настройка встроенной кнопки "Меню" (слева от поля ввода)
+tgRequest('setMyCommands', [
+    'commands' => [
+        ['command' => 'active', 'description' => '🟢 Активные заявки'],
+        ['command' => 'all', 'description' => '📋 Все заявки'],
+        ['command' => 'processed', 'description' => '✅ Обработанные'],
+        ['command' => 'comments', 'description' => '💬 С комментариями'],
+        ['command' => 'start', 'description' => '🔄 Перезапустить бота / Показать клавиатуру']
+    ]
+]);
+
 while (true) {
     $url = "https://api.telegram.org/bot{$tg_bot_token}/getUpdates?offset=" . ($last_update_id + 1) . "&timeout=30";
     
@@ -121,16 +132,16 @@ while (true) {
                     // Обработка кнопок меню
                     $query = null;
                     $header_msg = "";
-                    if ($text === '🟢 Активные заявки') {
+                    if ($text === '🟢 Активные заявки' || $text === '/active') {
                         $query = "SELECT * FROM requests WHERE status='new' ORDER BY id DESC LIMIT 15";
                         $header_msg = "🟢 <b>Последние 15 активных заявок:</b>";
-                    } elseif ($text === '📋 Все заявки') {
+                    } elseif ($text === '📋 Все заявки' || $text === '/all') {
                         $query = "SELECT * FROM requests ORDER BY id DESC LIMIT 15";
                         $header_msg = "📋 <b>Последние 15 заявок:</b>";
-                    } elseif ($text === '✅ Обработанные') {
+                    } elseif ($text === '✅ Обработанные' || $text === '/processed') {
                         $query = "SELECT * FROM requests WHERE status='processed' ORDER BY id DESC LIMIT 15";
                         $header_msg = "✅ <b>Последние 15 обработанных заявок:</b>";
-                    } elseif ($text === '💬 С комментариями') {
+                    } elseif ($text === '💬 С комментариями' || $text === '/comments') {
                         $query = "SELECT * FROM requests WHERE comment IS NOT NULL AND comment != '' ORDER BY id DESC LIMIT 15";
                         $header_msg = "💬 <b>Последние 15 заявок с комментариями:</b>";
                     }
