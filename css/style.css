@@ -4908,3 +4908,18 @@ body.sheet-open {
         transform: translateY(0);
     }
 }
+
+/* Fix consultation modal result state styles */
+.consultation-state-result .sheet-result-title {
+  color: #222 !important;
+  font-size: 28px !important;
+  margin-top: 16px;
+}
+.consultation-state-result .sheet-result-icon {
+  margin-bottom: 8px;
+}
+.consultation-state-result .sheet-result-button {
+  background: #007844 !important;
+  color: #fff !important;
+  margin-top: 24px;
+}
