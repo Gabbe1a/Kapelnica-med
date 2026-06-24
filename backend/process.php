@@ -14,7 +14,7 @@ $phone = trim($_POST['phone'] ?? '');
 
 require_once 'config.php';
 
-function notifySubscribers($pdo, $token, $name, $phone, $email) {
+function notifySubscribers($pdo, $token, $request_id, $name, $phone, $email) {
     if (empty($token) || $token === 'ВАШ_ТОКЕН_БОТА') return;
 
     try {
@@ -23,10 +23,22 @@ function notifySubscribers($pdo, $token, $name, $phone, $email) {
 
         if (empty($subscribers)) return;
 
-        $text = "🚨 <b>Новая заявка с сайта!</b>\n\n"
+        $text = "🚨 <b>Новая заявка #{$request_id}!</b>\n\n"
               . "👤 <b>Имя:</b> " . htmlspecialchars($name) . "\n"
               . "📞 <b>Телефон:</b> " . htmlspecialchars($phone) . "\n"
-              . "✉️ <b>Email:</b> " . htmlspecialchars($email);
+              . "✉️ <b>Email:</b> " . htmlspecialchars($email) . "\n\n"
+              . "ℹ️ <i>Статус: Новая</i>";
+
+        $keyboard = [
+            'inline_keyboard' => [
+                [
+                    ['text' => '✅ Отметить обработанной', 'callback_data' => "close_{$request_id}"]
+                ],
+                [
+                    ['text' => '💬 Оставить комментарий', 'callback_data' => "comment_{$request_id}"]
+                ]
+            ]
+        ];
 
         foreach ($subscribers as $chat_id) {
             $url = "https://api.telegram.org/bot{$token}/sendMessage";
@@ -36,7 +48,8 @@ function notifySubscribers($pdo, $token, $name, $phone, $email) {
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
                 'chat_id' => $chat_id,
                 'text' => $text,
-                'parse_mode' => 'HTML'
+                'parse_mode' => 'HTML',
+                'reply_markup' => json_encode($keyboard)
             ]));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_TIMEOUT, 2);
@@ -83,9 +96,10 @@ try {
     // Вставка в БД с защитой от SQL-инъекций (через PDO prepare)
     $stmt = $pdo->prepare("INSERT INTO requests (name, email, phone) VALUES (:name, :email, :phone)");
     $stmt->execute(['name' => $name, 'email' => $email, 'phone' => $phone]);
+    $request_id = $pdo->lastInsertId();
 
     // Отправка в Telegram всем подписчикам
-    notifySubscribers($pdo, $tg_bot_token, $name, $phone, $email);
+    notifySubscribers($pdo, $tg_bot_token, $request_id, $name, $phone, $email);
 
     echo json_encode(['success' => true, 'message' => 'Заявка успешно отправлена!']);
 } catch (PDOException $e) {

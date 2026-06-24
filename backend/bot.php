@@ -4,21 +4,57 @@ require_once __DIR__ . '/db.php';
 
 if ($tg_bot_token === 'ВАШ_ТОКЕН_БОТА' || empty($tg_bot_token)) {
     echo "Bot token not configured. Please edit config.php.\n";
-    // We sleep so the container doesn't restart furiously
     while(true) { sleep(60); }
 }
 
-// Создаем таблицу для подписчиков, если ее нет
+// 1. Создаем таблицу для подписчиков
 $pdo->exec("CREATE TABLE IF NOT EXISTS tg_subscribers (
     chat_id BIGINT PRIMARY KEY,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )");
 
+// 2. Обновляем таблицу заявок для поддержки статусов и комментариев
+try {
+    $pdo->exec("ALTER TABLE requests ADD COLUMN status VARCHAR(20) DEFAULT 'new'");
+} catch (Exception $e) {}
+try {
+    $pdo->exec("ALTER TABLE requests ADD COLUMN comment TEXT DEFAULT NULL");
+} catch (Exception $e) {}
+
 $last_update_id = 0;
-echo "Telegram Bot started polling...\n";
+echo "Telegram CRM Bot started polling...\n";
+
+function tgRequest($method, $data) {
+    global $tg_bot_token;
+    $url = "https://api.telegram.org/bot{$tg_bot_token}/{$method}";
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, is_array($data) ? json_encode($data) : $data);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+    $res = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($res, true);
+}
+
+function renderMessageText($req) {
+    $status_emoji = $req['status'] === 'processed' ? '✅' : '🚨';
+    $status_text = $req['status'] === 'processed' ? 'ОБРАБОТАНА' : 'Новая';
+    
+    $text = "{$status_emoji} <b>Заявка #{$req['id']}!</b>\n\n"
+          . "👤 <b>Имя:</b> " . htmlspecialchars($req['name']) . "\n"
+          . "📞 <b>Телефон:</b> " . htmlspecialchars($req['phone']) . "\n"
+          . "✉️ <b>Email:</b> " . htmlspecialchars($req['email']) . "\n\n"
+          . "ℹ️ <i>Статус: {$status_text}</i>";
+          
+    if (!empty($req['comment'])) {
+        $text .= "\n💬 <b>Комментарий:</b> " . htmlspecialchars($req['comment']);
+    }
+    return $text;
+}
 
 while (true) {
-    // Используем Long Polling
     $url = "https://api.telegram.org/bot{$tg_bot_token}/getUpdates?offset=" . ($last_update_id + 1) . "&timeout=30";
     
     $ch = curl_init($url);
@@ -33,19 +69,85 @@ while (true) {
             foreach ($updates['result'] as $update) {
                 $last_update_id = $update['update_id'];
                 
+                // Обработка текстовых сообщений
                 if (isset($update['message']['text']) && isset($update['message']['chat']['id'])) {
                     $chat_id = $update['message']['chat']['id'];
                     $text = trim($update['message']['text']);
                     
                     if ($text === '/start') {
-                        // Добавляем подписчика в базу
                         $stmt = $pdo->prepare("INSERT IGNORE INTO tg_subscribers (chat_id) VALUES (?)");
                         $stmt->execute([$chat_id]);
                         
-                        // Отправляем приветственное сообщение
-                        $msg = "✅ Успешно! Теперь вы будете получать уведомления о новых заявках Kapelnica-Med.";
-                        file_get_contents("https://api.telegram.org/bot{$tg_bot_token}/sendMessage?chat_id={$chat_id}&text=" . urlencode($msg));
-                        echo "New subscriber: {$chat_id}\n";
+                        tgRequest('sendMessage', [
+                            'chat_id' => $chat_id,
+                            'text' => "✅ CRM-режим активирован. Вы будете получать заявки с кнопками управления."
+                        ]);
+                    }
+                    
+                    // Обработка ответа (ForceReply) для комментария
+                    if (isset($update['message']['reply_to_message']['text'])) {
+                        $reply_text = $update['message']['reply_to_message']['text'];
+                        if (preg_match('/Введите комментарий для заявки #(\d+):/', $reply_text, $matches)) {
+                            $req_id = intval($matches[1]);
+                            $comment = $text;
+                            
+                            $pdo->prepare("UPDATE requests SET comment = ? WHERE id = ?")->execute([$comment, $req_id]);
+                            
+                            // Получаем обновленную заявку и отправляем подтверждение
+                            $req = $pdo->query("SELECT * FROM requests WHERE id = $req_id")->fetch(PDO::FETCH_ASSOC);
+                            if ($req) {
+                                tgRequest('sendMessage', [
+                                    'chat_id' => $chat_id,
+                                    'text' => "✅ Комментарий к заявке #{$req_id} сохранен!\n\n" . renderMessageText($req),
+                                    'parse_mode' => 'HTML'
+                                ]);
+                            }
+                        }
+                    }
+                }
+                
+                // Обработка нажатий на кнопки
+                if (isset($update['callback_query'])) {
+                    $cq = $update['callback_query'];
+                    $cq_id = $cq['id'];
+                    $chat_id = $cq['message']['chat']['id'];
+                    $message_id = $cq['message']['message_id'];
+                    $data = $cq['data'];
+
+                    if (strpos($data, 'close_') === 0) {
+                        $req_id = intval(substr($data, 6));
+                        $pdo->exec("UPDATE requests SET status='processed' WHERE id=$req_id");
+                        
+                        // Получаем актуальные данные заявки
+                        $req = $pdo->query("SELECT * FROM requests WHERE id = $req_id")->fetch(PDO::FETCH_ASSOC);
+                        
+                        // Обновляем сообщение (убираем кнопку "Закрыть", оставляем только комментарий)
+                        tgRequest('editMessageText', [
+                            'chat_id' => $chat_id,
+                            'message_id' => $message_id,
+                            'text' => renderMessageText($req),
+                            'parse_mode' => 'HTML',
+                            'reply_markup' => [
+                                'inline_keyboard' => [
+                                    [ ['text' => '💬 Оставить комментарий', 'callback_data' => "comment_{$req_id}"] ]
+                                ]
+                            ]
+                        ]);
+                        
+                        tgRequest('answerCallbackQuery', ['callback_query_id' => $cq_id, 'text' => 'Заявка обработана!']);
+                    }
+                    
+                    if (strpos($data, 'comment_') === 0) {
+                        $req_id = intval(substr($data, 8));
+                        tgRequest('sendMessage', [
+                            'chat_id' => $chat_id,
+                            'text' => "Введите комментарий для заявки #{$req_id}:",
+                            'reply_markup' => [
+                                'force_reply' => true,
+                                'selective' => true
+                            ]
+                        ]);
+                        tgRequest('answerCallbackQuery', ['callback_query_id' => $cq_id]);
                     }
                 }
             }
