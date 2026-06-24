@@ -177,10 +177,17 @@ while (true) {
                             // Получаем обновленную заявку и отправляем подтверждение
                             $req = $pdo->query("SELECT * FROM requests WHERE id = $req_id")->fetch(PDO::FETCH_ASSOC);
                             if ($req) {
+                                $markup = [ 'inline_keyboard' => [] ];
+                                if ($req['status'] === 'new') {
+                                    $markup['inline_keyboard'][] = [['text' => '✅ Отметить обработанной', 'callback_data' => "close_{$req['id']}"]];
+                                }
+                                $markup['inline_keyboard'][] = [['text' => '💬 Изменить комментарий', 'callback_data' => "comment_{$req['id']}"]];
+
                                 tgRequest('sendMessage', [
                                     'chat_id' => $chat_id,
                                     'text' => "✅ Комментарий к заявке #{$req_id} сохранен!\n\n" . renderMessageText($req),
-                                    'parse_mode' => 'HTML'
+                                    'parse_mode' => 'HTML',
+                                    'reply_markup' => $markup
                                 ]);
                             }
                         }
