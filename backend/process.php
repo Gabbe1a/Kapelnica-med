@@ -25,7 +25,7 @@ function notifySubscribers($pdo, $token, $request_id, $name, $phone, $email) {
 
         $text = "🚨 <b>Новая заявка #{$request_id}!</b>\n\n"
               . "👤 <b>Имя:</b> " . htmlspecialchars($name) . "\n"
-              . "📞 <b>Телефон:</b> " . htmlspecialchars($phone) . "\n"
+              . "📞 <b>Телефон:</b> <code>" . htmlspecialchars($phone) . "</code>\n"
               . "✉️ <b>Email:</b> " . htmlspecialchars($email) . "\n\n"
               . "ℹ️ <i>Статус: Новая</i>";
 
