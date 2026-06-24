@@ -183,9 +183,25 @@ while (true) {
                                 }
                                 $markup['inline_keyboard'][] = [['text' => '💬 Изменить комментарий', 'callback_data' => "comment_{$req['id']}"]];
 
+                                // 1. Подтверждение и возврат главного меню
+                                $main_keyboard = [
+                                    'keyboard' => [
+                                        [['text' => '🟢 Активные заявки'], ['text' => '📋 Все заявки']],
+                                        [['text' => '✅ Обработанные'], ['text' => '💬 С комментариями']]
+                                    ],
+                                    'resize_keyboard' => true,
+                                    'is_persistent' => true
+                                ];
                                 tgRequest('sendMessage', [
                                     'chat_id' => $chat_id,
-                                    'text' => "✅ Комментарий к заявке #{$req_id} сохранен!\n\n" . renderMessageText($req),
+                                    'text' => "✅ Комментарий к заявке #{$req_id} сохранен!",
+                                    'reply_markup' => $main_keyboard
+                                ]);
+
+                                // 2. Обновленная карточка с inline-кнопками
+                                tgRequest('sendMessage', [
+                                    'chat_id' => $chat_id,
+                                    'text' => renderMessageText($req),
                                     'parse_mode' => 'HTML',
                                     'reply_markup' => $markup
                                 ]);
