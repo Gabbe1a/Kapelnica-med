@@ -1,4 +1,4 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
 
     // ── Form Submit Logic ──────────────────────────────────────────
     const form = document.getElementById('consultation-form');
@@ -293,7 +293,7 @@
             const formData = new FormData(dripSheetForm);
 
             try {
-                const response = await fetch(dripSheetForm.action, {
+                const response = await fetch(dripSheetForm.getAttribute('action'), {
                     method: 'POST',
                     body: formData
                 });
@@ -391,7 +391,7 @@
             const formData = new FormData(consultForm);
 
             try {
-                const response = await fetch(consultForm.action, {
+                const response = await fetch(consultForm.getAttribute('action'), {
                     method: 'POST',
                     body: formData
                 });
